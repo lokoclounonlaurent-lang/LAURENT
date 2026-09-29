@@ -1,3 +1,9 @@
+/* ============ POLICES (hébergées localement) ============ */
+@font-face { font-family: "Inter"; font-style: normal; font-weight: 400 700; font-display: swap; src: url("assets/fonts/inter-latin.woff2") format("woff2"); }
+@font-face { font-family: "Poppins"; font-style: normal; font-weight: 600; font-display: swap; src: url("assets/fonts/poppins-600.woff2") format("woff2"); }
+@font-face { font-family: "Poppins"; font-style: normal; font-weight: 700; font-display: swap; src: url("assets/fonts/poppins-700.woff2") format("woff2"); }
+@font-face { font-family: "Poppins"; font-style: normal; font-weight: 800; font-display: swap; src: url("assets/fonts/poppins-800.woff2") format("woff2"); }
+
 /* ============ TOKENS ============ */
 :root {
   --red: #e30b17;
@@ -192,8 +198,8 @@ figure { margin: 0; }
 .photo-card img { width: 100%; aspect-ratio: 443 / 618; object-fit: cover; }
 .photo-card figcaption {
   position: absolute; inset: auto 0 0 0;
-  padding: 80px 24px 24px;
-  background: linear-gradient(to top, rgba(0,0,0,.85), transparent);
+  padding: 56px 24px 20px;
+  background: linear-gradient(to top, rgba(0,0,0,.8) 0%, rgba(0,0,0,.45) 55%, transparent 100%);
   color: #fff;
 }
 .photo-card strong { display: block; font-family: var(--font-title); text-transform: uppercase; font-size: 1.05rem; }
@@ -243,8 +249,19 @@ figure { margin: 0; }
   background: var(--card);
 }
 .feature .h3 { margin-top: 4px; }
-.feature__media { padding: 8px; background: #1a1a1a; border-radius: var(--radius); display: grid; place-items: center; }
-.feature__media img { max-width: 260px; }
+.feature__media { width: 100%; max-width: 340px; justify-self: center; }
+
+/* Vidéos (format vertical 9:16) */
+.video-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: #000;
+  border: 1px solid rgba(255,255,255,.08);
+  box-shadow: 0 30px 70px rgba(0,0,0,.55), 0 0 0 6px rgba(227,11,23,.08);
+}
+.video-card video { display: block; width: 100%; height: auto; aspect-ratio: 9 / 16; object-fit: cover; }
+.video-card .badge--bl { left: 0; bottom: 0; }
 
 /* Anatomie */
 .anatomy { display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 36px; align-items: center; }
@@ -256,8 +273,9 @@ figure { margin: 0; }
 
 /* Pack */
 .pack { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; align-items: start; }
-.pack__main { display: grid; grid-template-columns: 1fr 190px; gap: 40px; align-items: center; padding: 48px 40px; }
+.pack__main { display: grid; grid-template-columns: 1fr 260px; gap: 40px; align-items: center; padding: 48px 40px; }
 .pack__thumb { padding: 8px; background: #141414; border-radius: 8px; }
+.pack__thumb img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 4px; }
 .subtitle { color: var(--red); font-size: .8rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; margin: 8px 0 12px !important; }
 .subtitle--light { color: var(--text) !important; }
 .value { margin-top: 16px; font-size: .75rem !important; font-weight: 700; letter-spacing: .08em; color: var(--text-soft); }
@@ -323,7 +341,7 @@ figure { margin: 0; }
 
 /* CTA final */
 .final { background: radial-gradient(ellipse 45% 55% at 50% 72%, rgba(227,11,23,.18), transparent 70%), var(--bg); }
-.final__media { width: 320px; margin: 0 auto 40px; }
+.final__media { width: 340px; max-width: 100%; margin: 0 auto 48px; }
 .final .h1 { max-width: 640px; margin: 0 auto; }
 .final__price { margin: 40px 0 12px; }
 .final__price s { font-family: var(--font-title); font-weight: 700; font-size: 1.4rem; color: var(--text-soft); margin-right: 12px; }
@@ -393,11 +411,11 @@ figure { margin: 0; }
   .container { padding: 0 16px; }
   .grid-4, .anatomy { grid-template-columns: 1fr; }
   .pack__main { grid-template-columns: 1fr; padding: 32px 24px; }
-  .pack__thumb { max-width: 220px; }
+  .pack__thumb { max-width: 100%; }
   .card { padding: 28px 24px; }
   .offer__list li { flex-direction: column; gap: 2px; font-size: 1rem; }
   .price { font-size: 2.6rem; }
-  .final__media { width: 240px; }
+  .final__media { width: 280px; }
   .final__price strong { font-size: 2rem; }
   .btn--lg { width: 100%; }
 }

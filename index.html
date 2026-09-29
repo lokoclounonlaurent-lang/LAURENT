@@ -5,10 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VELO X — Votre salle de sport à la maison</title>
   <meta name="description" content="Vélo d'appartement VELOX + Pack Home Fitness 21 jours offert. Livraison disponible, paiement à la livraison, garantie vendeur 7 jours.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#0d0d0d">
+  <link rel="preload" href="assets/fonts/poppins-800.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/velo.webp" as="image" fetchpriority="high">
   <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
 
@@ -43,7 +45,7 @@
           </a>
         </div>
         <figure class="hero__media frame">
-          <img src="assets/velo.jpg" alt="Vélo d'appartement VELOX noir et rouge" width="460" height="460">
+          <img src="assets/velo.webp" alt="Vélo d'appartement VELOX noir et rouge" width="460" height="460" fetchpriority="high" decoding="async">
           <span class="badge badge--tr"><i class="dot"></i>Châssis renforcé</span>
           <span class="badge badge--bl">Série 2026 • Ergonomie studio</span>
         </figure>
@@ -54,7 +56,7 @@
     <section class="section section--light">
       <div class="container split">
         <figure class="photo-card">
-          <img src="assets/lifestyle.jpg" alt="Femme souriante pédalant sur le vélo VELOX à la maison" loading="lazy">
+          <img src="assets/lifestyle.webp" alt="Femme souriante pédalant sur le vélo VELOX à la maison" width="428" height="530" loading="lazy" decoding="async">
           <figcaption>
             <strong>Votre temps. Votre énergie.</strong>
             <span>Une séance chez vous sans contrainte de transport ni horaire imposé.</span>
@@ -127,9 +129,10 @@
             <h3 class="h3">Une pratique fluide qui respecte votre foyer</h3>
             <p class="lead">Le volant d'inertie silencieux et le système de résistance permettent de s'entraîner tôt le matin ou tard le soir sans réveiller toute la maison.</p>
           </div>
-          <div class="feature__media">
-            <img src="assets/velo.jpg" alt="Vélo VELOX vu de profil" loading="lazy">
-          </div>
+          <figure class="feature__media video-card">
+            <video class="js-lazy-video" data-src="assets/video-volant.mp4" poster="assets/video-volant.webp" muted loop playsinline preload="none" width="540" height="960" aria-label="Gros plan du volant d'inertie du vélo en mouvement"></video>
+            <span class="badge badge--bl"><i class="dot"></i>Volant d'inertie silencieux</span>
+          </figure>
         </div>
       </div>
     </section>
@@ -157,7 +160,7 @@
             </article>
           </div>
           <figure class="frame anatomy__media">
-            <img src="assets/velo.jpg" alt="Vélo VELOX en détail" loading="lazy">
+            <img src="assets/velo.webp" alt="Vélo VELOX en détail" width="460" height="460" loading="lazy" decoding="async">
           </figure>
           <div class="anatomy__col">
             <article class="card card--sm">
@@ -200,7 +203,7 @@
               <p class="lead">Votre équipement principal pour vos séances à domicile. Châssis robuste, selle et guidon ajustables, transmission silencieuse.</p>
               <p class="value value--light">Valeur standard : 160 000 FCFA</p>
             </div>
-            <div class="pack__thumb"><img src="assets/velo.jpg" alt="" loading="lazy"></div>
+            <div class="pack__thumb"><img src="assets/velo.webp" alt="" width="460" height="460" loading="lazy" decoding="async"></div>
           </article>
           <article class="card">
             <span class="label">Offert aujourd'hui</span>
@@ -353,8 +356,8 @@
     <!-- ============ CTA FINAL ============ -->
     <section class="section final">
       <div class="container center">
-        <figure class="frame final__media">
-          <img src="assets/velo.jpg" alt="Vélo VELOX" loading="lazy">
+        <figure class="video-card final__media">
+          <video class="js-lazy-video" data-src="assets/video-effort.mp4" poster="assets/video-effort.webp" muted loop playsinline preload="none" width="540" height="960" aria-label="Une femme concentrée pendant sa séance de vélo à domicile"></video>
         </figure>
         <span class="eyebrow">Prenez le contrôle dès aujourd'hui</span>
         <h2 class="h1">N'attendez pas le moment parfait.</h2>
@@ -407,6 +410,5 @@
     <a href="#" class="btn btn--sm js-order">Commander</a>
   </div>
 
-  <script src="script.js"></script>
 </body>
 </html>

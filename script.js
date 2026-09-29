@@ -25,7 +25,7 @@ faqItems.forEach((item) => {
 
 // Apparition des blocs au scroll
 const revealTargets = document.querySelectorAll(
-  ".section-head, .card, .trust__item, .feature, .offer, .photo-card, .frame"
+  ".section-head, .card, .trust__item, .offer"
 );
 if ("IntersectionObserver" in window) {
   const observer = new IntersectionObserver(
@@ -43,6 +43,48 @@ if ("IntersectionObserver" in window) {
     el.classList.add("reveal");
     observer.observe(el);
   });
+}
+
+// Vidéos : chargées seulement à l'approche de l'écran, en pause quand elles sont hors écran
+const lazyVideos = document.querySelectorAll(".js-lazy-video");
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function loadVideo(video) {
+  if (!video.src) video.src = video.dataset.src;
+}
+function playVideo(video) {
+  if (reduceMotion) return; // on garde l'image fixe si l'utilisateur limite les animations
+  loadVideo(video);
+  video.play().catch(() => {});
+}
+
+if ("IntersectionObserver" in window) {
+  const preloadObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !reduceMotion) {
+          loadVideo(entry.target);
+          preloadObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { rootMargin: "600px 0px" }
+  );
+  const playObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) playVideo(entry.target);
+        else entry.target.pause();
+      });
+    },
+    { threshold: 0.25 }
+  );
+  lazyVideos.forEach((video) => {
+    preloadObserver.observe(video);
+    playObserver.observe(video);
+  });
+} else {
+  lazyVideos.forEach(playVideo);
 }
 
 // Année du footer
