@@ -14,7 +14,7 @@ Pour la mettre en ligne, déposez tout le dossier sur n'importe quel hébergeur 
 |---|---|
 | `index.html` | Contenu des 10 sections de la page |
 | `styles.css` | Couleurs, typographies (Poppins + Inter), responsive |
-| `script.js` | Boutons de commande WhatsApp, FAQ, animations |
+| `script.js` | FAQ, vidéos, carrousel, animations |
 | `assets/velo.webp` | Photo produit du vélo |
 | `assets/lifestyle.webp` | Photo d'ambiance (femme sur le vélo) |
 | `assets/video-volant.mp4` + `.webp` | Vidéo en gros plan du volant d'inertie, dans le bloc « Une pratique fluide qui respecte votre foyer » (+ image d'aperçu) |
@@ -55,7 +55,7 @@ ffmpeg -i assets/ma-video.mp4 -frames:v 1 -c:v libwebp -quality 82 assets/ma-vid
 
 ## Fonctionnalités
 
-- **Commande via WhatsApp** : tous les boutons « Commander » ouvrent WhatsApp avec un message pré-rempli.
+- **Commande via Shopify** : les 5 boutons « Commander » (en-tête, haut de page, offre, appel final, barre mobile) mènent à la fiche produit de la boutique : https://fitnessmobilee.myshopify.com/products/votre-salle-de-sport-est-desormais-a-la-maison?pb=0
 - **Carrousel des pièces clés** : défilement fluide (glisser au doigt, flèches, clavier), aimanté sur chaque carte, avec une barre de progression. Il avance tout seul toutes les 3,5 s lorsqu'il est visible, et se met en pause au survol ou dès que le visiteur l'utilise.
 - **FAQ en accordéon** : une seule question ouverte à la fois.
 - **Responsive** : ordinateur, tablette et mobile (vérifié à 1296px et 390px).
@@ -72,7 +72,7 @@ ffmpeg -i assets/ma-video.mp4 -frames:v 1 -c:v libwebp -quality 82 assets/ma-vid
 
 ## À faire avant la mise en ligne
 
-- [ ] **Numéro WhatsApp** : remplacer `229XXXXXXXX` dans `script.js` (ligne 3). Sans ce numéro, les boutons de commande ne fonctionnent pas.
+- [x] ~~Lien des boutons de commande~~ : relié à la boutique Shopify.
 - [ ] **Réponses de la FAQ** : elles ont été rédigées à partir du contenu de la page. Vérifier en particulier les zones de livraison, les frais de livraison et les modes de paiement.
 - [ ] **Photos** : remplacer `assets/velo.webp` et `assets/lifestyle.webp` par les originaux en haute définition, convertis en WebP et en gardant les mêmes noms de fichiers.
 - [x] ~~Vidéos trop lourdes~~ : converties en MP4 (285 Ko au lieu de 28,5 Mo).
@@ -84,5 +84,5 @@ ffmpeg -i assets/ma-video.mp4 -frames:v 1 -c:v libwebp -quality 82 assets/ma-vid
 ## Personnalisation rapide
 
 - **Couleurs** : variables en haut de `styles.css` (`--red`, `--bg`, `--text-soft`…).
-- **Message WhatsApp** : constante `ORDER_MESSAGE` dans `script.js`.
+- **Lien de commande** : dans `index.html`, remplacer l'adresse Shopify (5 occurrences, recherche « myshopify »).
 - **Prix** : à modifier dans `index.html`, à trois endroits (section Offre, appel final, barre mobile).
