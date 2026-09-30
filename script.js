@@ -87,5 +87,73 @@ if ("IntersectionObserver" in window) {
   lazyVideos.forEach(playVideo);
 }
 
+// Carrousel des pièces clés : flèches, barre de progression, défilement automatique
+document.querySelectorAll("[data-carousel]").forEach((carousel) => {
+  const track = carousel.querySelector("[data-track]");
+  const slides = track.children;
+  const progress = carousel.querySelector("[data-progress]");
+  const AUTOPLAY_DELAY = 3500; // ms entre deux pièces
+  const RESUME_DELAY = 6000; // pause après une action de l'utilisateur
+
+  const step = () => slides[0].getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 0);
+  const maxScroll = () => track.scrollWidth - track.clientWidth;
+  const atEnd = () => track.scrollLeft >= maxScroll() - 4;
+
+  function go(direction) {
+    if (direction > 0 && atEnd()) track.scrollTo({ left: 0 });
+    else if (direction < 0 && track.scrollLeft <= 4) track.scrollTo({ left: maxScroll() });
+    else track.scrollBy({ left: direction * step() });
+  }
+
+  // Barre de progression : sa largeur reflète la part visible et sa position
+  let ticking = false;
+  function updateProgress() {
+    const visible = track.clientWidth / track.scrollWidth;
+    const ratio = maxScroll() > 0 ? track.scrollLeft / maxScroll() : 1;
+    progress.style.transform = `scaleX(${visible + (1 - visible) * ratio})`;
+    ticking = false;
+  }
+  track.addEventListener("scroll", () => {
+    if (!ticking) { requestAnimationFrame(updateProgress); ticking = true; }
+  }, { passive: true });
+  window.addEventListener("resize", updateProgress);
+  updateProgress();
+
+  // Défilement automatique : seulement si visible, sans survol ni interaction récente
+  let timer = null;
+  let pausedUntil = 0;
+  let hovered = false;
+  let inView = false;
+  const canAutoplay = () => !reduceMotion && inView && !hovered && Date.now() > pausedUntil;
+
+  function schedule() {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      if (canAutoplay()) go(1);
+      schedule();
+    }, AUTOPLAY_DELAY);
+  }
+  function userAction() { pausedUntil = Date.now() + RESUME_DELAY; }
+
+  carousel.querySelector("[data-prev]").addEventListener("click", () => { userAction(); go(-1); });
+  carousel.querySelector("[data-next]").addEventListener("click", () => { userAction(); go(1); });
+  ["pointerdown", "wheel", "touchstart", "focusin"].forEach((evt) =>
+    track.addEventListener(evt, userAction, { passive: true })
+  );
+  carousel.addEventListener("mouseenter", () => { hovered = true; });
+  carousel.addEventListener("mouseleave", () => { hovered = false; });
+
+  // Navigation au clavier quand le carrousel a le focus
+  track.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") { e.preventDefault(); userAction(); go(1); }
+    if (e.key === "ArrowLeft") { e.preventDefault(); userAction(); go(-1); }
+  });
+
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(([entry]) => { inView = entry.isIntersecting; }, { threshold: 0.4 }).observe(carousel);
+  }
+  schedule();
+});
+
 // Année du footer
 document.getElementById("year").textContent = new Date().getFullYear();

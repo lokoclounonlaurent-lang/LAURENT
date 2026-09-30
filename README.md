@@ -19,6 +19,7 @@ Pour la mettre en ligne, déposez tout le dossier sur n'importe quel hébergeur 
 | `assets/lifestyle.webp` | Photo d'ambiance (femme sur le vélo) |
 | `assets/video-volant.mp4` + `.webp` | Vidéo en gros plan du volant d'inertie, dans le bloc « Une pratique fluide qui respecte votre foyer » (+ image d'aperçu) |
 | `assets/video-effort.mp4` + `.webp` | Vidéo en gros plan de l'effort, dans l'appel à l'action final (+ image d'aperçu) |
+| `assets/pieces/` | 8 photos du carrousel « Chaque détail compte », toutes au même format (600×686, WebP) |
 | `assets/fonts/` | Polices Poppins et Inter, hébergées avec le site |
 | `_sources/` | GIF d'origine (28 Mo), gardés pour archive. **Ne pas mettre en ligne** (exclus de git via `.gitignore`) |
 
@@ -45,7 +46,7 @@ ffmpeg -i assets/ma-video.mp4 -frames:v 1 -c:v libwebp -quality 82 assets/ma-vid
 2. **Hero** : « Votre salle de sport est désormais à la maison. »
 3. **Problème** : « Vous avez envie de bouger… mais votre journée passe toujours trop vite. »
 4. **Bénéfices** : 4 cartes, puis un bloc « Une pratique fluide qui respecte votre foyer »
-5. **Le vélo en détail** : 4 caractéristiques autour de la photo, puis « Comment l'utiliser ? » en 4 étapes
+5. **Le vélo en détail** : 4 caractéristiques autour de la photo, carrousel « Chaque détail compte » (8 pièces clés), puis « Comment l'utiliser ? » en 4 étapes
 6. **Le pack** : vélo + 4 bonus avec leur valeur
 7. **Réassurance et avis clients** : 5 garanties, 3 témoignages
 8. **Offre** : récapitulatif de la valeur (195 000 FCFA), puis prix final de 130 000 FCFA
@@ -55,6 +56,7 @@ ffmpeg -i assets/ma-video.mp4 -frames:v 1 -c:v libwebp -quality 82 assets/ma-vid
 ## Fonctionnalités
 
 - **Commande via WhatsApp** : tous les boutons « Commander » ouvrent WhatsApp avec un message pré-rempli.
+- **Carrousel des pièces clés** : défilement fluide (glisser au doigt, flèches, clavier), aimanté sur chaque carte, avec une barre de progression. Il avance tout seul toutes les 3,5 s lorsqu'il est visible, et se met en pause au survol ou dès que le visiteur l'utilise.
 - **FAQ en accordéon** : une seule question ouverte à la fois.
 - **Responsive** : ordinateur, tablette et mobile (vérifié à 1296px et 390px).
 - **Barre de commande fixe sur mobile** : prix et bouton toujours visibles en bas de l'écran.
